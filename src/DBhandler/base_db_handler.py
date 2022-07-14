@@ -19,5 +19,5 @@ class BaseDBHandler(ABC):
         pass
 
     @abstractmethod
-    def insert(self):
+    def insert(self, documents: list):
         pass

@@ -30,6 +30,32 @@ class MongoHandler(BaseDBHandler):
                 print(f"{UNKNOWN_ERROR}: {str(e)}")
                 return False
 
+    def delete(self, **delete_filter):
+        with self.connect() as client:
+            db = client[self.db_name]
+            collection = db[self.collection_name]
+            delete_filter = self._adding_doc_type(delete_filter)
+            collection.delete_one(delete_filter)
+            return True
+
+    def update(self, search_filter: dict, **new_values_to_update):
+        with self.connect() as client:
+            db = client[self.db_name]
+            collection = db[self.collection_name]
+            search_filter = self._adding_doc_type(search_filter)
+            new_values_to_update = {'$set': new_values_to_update}
+            collection.update_many(search_filter, new_values_to_update)
+            return True
+
+    def replace_document(self, search_filter: dict, **new_document_to_replace):
+        with self.connect() as client:
+            db = client[self.db_name]
+            collection = db[self.collection_name]
+            search_filter = self._adding_doc_type(search_filter)
+            new_document_to_replace = self._adding_doc_type(new_document_to_replace)
+            collection.replace_one(search_filter, new_document_to_replace)
+            return True
+
     def _adding_doc_type(self, document: dict):
         document[self._doc_type_key] = self.doc_type
         return document

@@ -30,4 +30,14 @@ class BotHandler(MongoHandler):
         results = self.query(**{self.bot_id_key: bot_id})
         return results[0][self.channels_key] if results else None
 
+    def delete_bot(self, bot_id: str):
+        self.delete(**{self.bot_id_key: bot_id})
 
+    def delete_all_bots(self):
+        self.delete(**{})
+
+    def update_bot_details(self, bot_id: str, **details_to_update):
+        self.update({self.bot_id_key: bot_id}, **details_to_update)
+
+    def update_all_bots_details(self, **details_to_update):
+        self.update({}, **details_to_update)

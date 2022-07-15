@@ -19,3 +19,15 @@ class ChannelHandler(MongoHandler):
     def get_channel_platform(self, channel_id: str) -> str:
         results = self.query(**{self.channel_id_key: channel_id})
         return results[0][self.platform_key] if results else None
+
+    def delete_channel(self, channel_id: str):
+        self.delete(**{self.channel_id_key: channel_id})
+
+    def delete_all_channels(self):
+        self.delete(**{})
+
+    def update_channel_details(self, channel_id: str, **details_to_update):
+        self.update({self.channel_id_key: channel_id}, **details_to_update)
+
+    def update_all_channels_details(self, **details_to_update):
+        self.update({}, **details_to_update)

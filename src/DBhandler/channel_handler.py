@@ -12,6 +12,10 @@ class ChannelHandler(MongoHandler):
     def get_all_channels(self) -> list:
         return self.query(**{})
 
+    def get_channels(self, channel_ids: list[str]):
+        query_to_mongo = {self.channel_id_key: {"$in": channel_ids}}
+        return self.query(**query_to_mongo)
+
     def get_channel_details(self, channel_id: str) -> dict:
         results = self.query(**{self.channel_id_key: channel_id})
         return results[0] if results else None

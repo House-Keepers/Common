@@ -18,6 +18,12 @@ class BotHandler(MongoHandler):
         results = self.query(**{self.bot_id_key: bot_id})
         return results[0] if results else None
 
+    def add_bot_channel(self, bot_id: str, chanel_id: str):
+        results = self.query(**{self.bot_id_key: bot_id})
+        channels = results[0][self.channels_key]
+        channels.append(chanel_id)
+        return self.update({self.bot_id_key: bot_id}, channels=channels)
+
     def get_bot_text(self, bot_id: str) -> str:
         results = self.query(**{self.bot_id_key: bot_id})
         return results[0][self.text_key] if results else None
@@ -31,13 +37,13 @@ class BotHandler(MongoHandler):
         return results[0][self.channels_key] if results else None
 
     def delete_bot(self, bot_id: str):
-        self.delete(**{self.bot_id_key: bot_id})
+        return self.delete(**{self.bot_id_key: bot_id})
 
     def delete_all_bots(self):
-        self.delete(**{})
+        return self.delete(**{})
 
     def update_bot_details(self, bot_id: str, **details_to_update):
-        self.update({self.bot_id_key: bot_id}, **details_to_update)
+        return self.update({self.bot_id_key: bot_id}, **details_to_update)
 
     def update_all_bots_details(self, **details_to_update):
-        self.update({}, **details_to_update)
+        return self.update({}, **details_to_update)

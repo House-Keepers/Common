@@ -21,13 +21,13 @@ class ChannelHandler(MongoHandler):
         return results[0][self.platform_key] if results else None
 
     def delete_channel(self, channel_id: str):
-        self.delete(**{self.channel_id_key: channel_id})
+        return self.delete(**{self.channel_id_key: channel_id})
 
     def delete_all_channels(self):
-        self.delete(**{})
+        return self.delete(**{})
 
     def update_channel_details(self, channel_id: str, **details_to_update):
-        self.update({self.channel_id_key: channel_id}, **details_to_update)
+        return self.update({self.channel_id_key: channel_id}, **details_to_update)
 
     def update_all_channels_details(self, **details_to_update):
-        self.update({}, **details_to_update)
+        return self.update({}, **details_to_update)

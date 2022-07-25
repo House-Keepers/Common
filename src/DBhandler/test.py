@@ -10,3 +10,6 @@ from channel_handler import ChannelHandler
 # # # b.insert([b_data])
 # res = c.get_channels(["12", "13"])
 # print(res)
+# c = ChannelHandler()
+# res = c.get_channel_details("62dec6a83cbe67b42746a94b")
+# print(res)

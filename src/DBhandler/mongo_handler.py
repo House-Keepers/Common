@@ -1,5 +1,6 @@
 from base_db_handler import BaseDBHandler
 from utils import UNKNOWN_ERROR
+from bson.objectid import ObjectId
 
 
 class MongoHandler(BaseDBHandler):
@@ -55,6 +56,10 @@ class MongoHandler(BaseDBHandler):
             new_document_to_replace = self._adding_doc_type(new_document_to_replace)
             collection.replace_one(search_filter, new_document_to_replace)
             return True
+
+    @staticmethod
+    def convert_to_object_id(id: str):
+        return ObjectId(id)
 
     def _adding_doc_type(self, document: dict):
         document[self._doc_type_key] = self.doc_type

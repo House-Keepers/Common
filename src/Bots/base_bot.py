@@ -10,13 +10,13 @@ class BaseBot(ABC):
         self.api_url = api_url
 
     @abstractmethod
-    def login(self):
+    def login(self, **kwargs):
         pass
 
     @abstractmethod
-    def parse_format(self):
+    def parse_format(self, **kwargs):
         pass
 
     @abstractmethod
-    def post(self, where: str, **kwargs):
+    def run(self, **kwargs):
         pass

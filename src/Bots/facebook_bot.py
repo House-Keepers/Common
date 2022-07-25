@@ -21,7 +21,7 @@ class FacebookBot(BaseBot):
     def parse_format(self):
         pass
 
-    def post(self, where: str, **kwargs):
+    def run(self, where: str, **kwargs):
         self.methods[where](**kwargs)
 
     def text_post(self, parent_object: str, connection_name: str, message: str, link: str = None):

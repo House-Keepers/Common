@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='HouseKeepersCommon',
+    name='Common',
     version='1.0',
     author='Cristiano Ronaldo',
     description='Siiiiii',
